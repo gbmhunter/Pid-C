@@ -7,8 +7,8 @@
 //! @details
 //!		<b>Last Modified:			</b> 28/11/2011					\n
 //!		<b>Version:					</b> v1.0.0						\n
-//!		<b>Company:					</b> Beta Solutions				\n
-//!		<b>Project:					</b> VicTrust BLDC Controller	\n
+//!		<b>Company:					</b> CladLabs					\n
+//!		<b>Project:					</b> Free Code Modules			\n
 //!		<b>Language:				</b> C							\n
 //!		<b>Compiler:				</b> GCC						\n
 //! 	<b>uC Model:				</b> PSoC5						\n
