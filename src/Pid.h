@@ -1,9 +1,9 @@
 //!
-//! @file 		Pid.c
+//! @file 		Pid.h
 //! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 //! @edited 	n/a
 //! @date 		09/11/2012
-//! @brief 		Controls any lights (e.g. LEDS).
+//! @brief 		Header file for Pid.c
 //! @details
 //!		<b>Last Modified:			</b> 02/10/2012					\n
 //!		<b>Version:					</b> v1.0.0						\n
