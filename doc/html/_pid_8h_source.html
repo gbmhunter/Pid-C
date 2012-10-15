@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">PID&#160;<span id="projectnumber">v1.0.0</span></div>
+   <div id="projectname">PID&#160;<span id="projectnumber">v1.1.0</span></div>
    <div id="projectbrief">PID controller.</div>
   </td>
  </tr>
@@ -29,6 +29,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -81,42 +82,69 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00020"></a>00020 
 <a name="l00021"></a>00021 
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="preprocessor">#ifndef _PID_H</span>
-<a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#define _PID_H</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span>
-<a name="l00026"></a>00026 <span class="comment">//===============================================================================================//</span>
-<a name="l00027"></a>00027 <span class="comment">//=================================== PUBLIC TYPEDEFS ===========================================//</span>
-<a name="l00028"></a>00028 <span class="comment">//===============================================================================================//</span>
-<a name="l00029"></a>00029 
-<a name="l00030"></a><a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">00030</a> <span class="keyword">typedef</span> <span class="keyword">enum</span>                    
-<a name="l00031"></a>00031 {
-<a name="l00032"></a><a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2dafd7e0e1d26cfcc9faf290160bf1b1273">00032</a>         <a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2dafd7e0e1d26cfcc9faf290160bf1b1273" title="Direct drive (+error gives +output)">PID_DIRECT</a>,                     
-<a name="l00033"></a><a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2dae4acef98f0916ba4c36e32c660dd73c3">00033</a>         <a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2dae4acef98f0916ba4c36e32c660dd73c3" title="Reverse driver (+error gives -output)">PID_REVERSE</a>                     
-<a name="l00034"></a>00034 } <a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a>;
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="comment">//===============================================================================================//</span>
-<a name="l00037"></a>00037 <span class="comment">//=================================== PUBLIC FUNCTION PROTOTYPES ================================//</span>
-<a name="l00038"></a>00038 <span class="comment">//===============================================================================================//</span>
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="comment">// See the Doxygen documentation or the function definitions in Pid.c for more information</span>
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#a344531a8de4e1ab13e754dbd392fa6e4" title="Init function.">Pid_Init</a>(<span class="keywordtype">double</span> kp, <span class="keywordtype">double</span> ki, <span class="keywordtype">double</span> kd, <a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a> controllerDirection, uint32_t sampleTimeMs);
-<a name="l00043"></a>00043 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#ac75d7b3be89861bec6280101226f04e8" title="Computes new PID values.">Pid_Compute</a>(<span class="keywordtype">double</span> setPoint, <span class="keywordtype">double</span> input);
-<a name="l00044"></a>00044 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a017764c792e986a6a31106ff867168fb" title="Returns the last calculated error.">Pid_GetError</a>();      
-<a name="l00045"></a>00045 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#a1b1573f04fcaaf6932d98ad53817909e">Pid_SetControllerDirection</a>(<a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a> controllerDirection);
-<a name="l00046"></a>00046 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#af86b8fe2ac43bedf27e12581b651cc42" title="Changes the sample time.">Pid_SetSampleTime</a>(uint32_t newSampleTimeMs);
-<a name="l00047"></a>00047 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a104e9687b7698bd6cc49cffc6632ad14" title="Returns the porportional constant.">Pid_GetKp</a>();                                            
-<a name="l00048"></a>00048 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#aabff5dba183e7b5e977fdb387ebd9f44" title="Returns the integral constant.">Pid_GetKi</a>();                                             
-<a name="l00049"></a>00049 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a917b9dd1a4ffe2253543c7ce45932742" title="Returns the derivative constant.">Pid_GetKd</a>();                                              
-<a name="l00050"></a>00050 <a class="code" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a> <a class="code" href="_pid_8c.html#a9b54780093be5681096896d5547cbd56" title="Returns the direction.">Pid_GetDirection</a>();                                       
-<a name="l00051"></a>00051 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#af5b9ecb087e8b9317b593b5f4ea63b11" title="Returns the last calculated derivative term.">Pid_GetDTerm</a>();
-<a name="l00052"></a>00052 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#aeda6d318f4c704780d7092991fdfdc2a" title="Returns the last calculated input change.">Pid_GetInputChange</a>();
-<a name="l00053"></a>00053 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#ae0b88189a6a4b9ccc13b53cfb506b9f9" title="This function allows the controller&#39;s dynamic performance to be adjusted.">Pid_SetTunings</a>(<span class="keywordtype">double</span> kp, <span class="keywordtype">double</span> ki, <span class="keywordtype">double</span> kd);
-<a name="l00054"></a>00054 <span class="keywordtype">void</span>    Pid_SetOutputLimits();
+<a name="l00023"></a>00023 <span class="comment">// Start of header guard</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#ifndef _PID_H</span>
+<a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#define _PID_H</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>
+<a name="l00027"></a>00027 <span class="comment">//===============================================================================================//</span>
+<a name="l00028"></a>00028 <span class="comment">//=================================== PUBLIC TYPEDEFS ===========================================//</span>
+<a name="l00029"></a>00029 <span class="comment">//===============================================================================================//</span>
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">00031</a> <span class="keyword">typedef</span> <span class="keyword">enum</span>                    
+<a name="l00032"></a>00032 {
+<a name="l00033"></a><a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bdafd7e0e1d26cfcc9faf290160bf1b1273">00033</a>         <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bdafd7e0e1d26cfcc9faf290160bf1b1273" title="Direct drive (+error gives +output)">PID_DIRECT</a>,                     
+<a name="l00034"></a><a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bdae4acef98f0916ba4c36e32c660dd73c3">00034</a>         <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bdae4acef98f0916ba4c36e32c660dd73c3" title="Reverse driver (+error gives -output)">PID_REVERSE</a>                     
+<a name="l00035"></a>00035 } <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a>;
+<a name="l00036"></a>00036 
+<a name="l00039"></a><a class="code" href="structpid_data__t.html">00039</a> <span class="keyword">typedef</span> <span class="keyword">struct</span>
+<a name="l00040"></a>00040 {
+<a name="l00041"></a><a class="code" href="structpid_data__t.html#aa03c085b21acfe33c87ae55b5fefdf53">00041</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#aa03c085b21acfe33c87ae55b5fefdf53" title="Time-step scaled proportional constant for quick calculation (equal to actualKp)">zKp</a>;                                     
+<a name="l00042"></a><a class="code" href="structpid_data__t.html#a89a2cd82f2dc6ef9d472be46ef7775af">00042</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a89a2cd82f2dc6ef9d472be46ef7775af" title="Time-step scaled integral constant for quick calculation.">zKi</a>;                                     
+<a name="l00043"></a><a class="code" href="structpid_data__t.html#a54468f189a617efd531b2bda3b40b573">00043</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a54468f189a617efd531b2bda3b40b573" title="Time-step scaled derivative constant for quick calculation.">zKd</a>;                                     
+<a name="l00044"></a><a class="code" href="structpid_data__t.html#a99a0f8fcf176c5572ee1a4118967fd96">00044</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a99a0f8fcf176c5572ee1a4118967fd96" title="Actual (non-scaled) proportional constant.">actualKp</a>;                        
+<a name="l00045"></a><a class="code" href="structpid_data__t.html#ac16378ea1561ac2abadf906987a674c2">00045</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#ac16378ea1561ac2abadf906987a674c2" title="Actual (non-scaled) integral constant.">actualKi</a>;                        
+<a name="l00046"></a><a class="code" href="structpid_data__t.html#ae899295a18199c3a2478c416138d100b">00046</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#ae899295a18199c3a2478c416138d100b" title="Actual (non-scaled) derivative constant.">actualKd</a>;                        
+<a name="l00047"></a><a class="code" href="structpid_data__t.html#a5a4487b953d33eec62d158bc955145c5">00047</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a5a4487b953d33eec62d158bc955145c5" title="Actual (non-scaled) proportional constant.">prevInput</a>;                       
+<a name="l00048"></a><a class="code" href="structpid_data__t.html#aea0718d96c4e0cf2c2f925c54bb42b21">00048</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#aea0718d96c4e0cf2c2f925c54bb42b21" title="The change in input between the current and previous value.">inputChange</a>;                     
+<a name="l00049"></a><a class="code" href="structpid_data__t.html#a165bf5c73bfcf2b73b4f521caa588cb3">00049</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a165bf5c73bfcf2b73b4f521caa588cb3" title="The set-point the PID control is trying to make the output converge to.">setPoint</a>;                        
+<a name="l00050"></a><a class="code" href="structpid_data__t.html#a1ec236df65b93a338aecdf3fa64790f9">00050</a>         <span class="keywordtype">double</span> error;                           
+<a name="l00051"></a>00051 
+<a name="l00052"></a><a class="code" href="structpid_data__t.html#a47943f73244ca117fa9bf9234cbed317">00052</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a47943f73244ca117fa9bf9234cbed317" title="The control output. This is updated when Pid_Go() is called.">output</a>;                          
+<a name="l00053"></a><a class="code" href="structpid_data__t.html#a32620fd308c60d02e65c11194f0e96d3">00053</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a32620fd308c60d02e65c11194f0e96d3" title="The output value calculated the previous time Pid_Go was called.">prevOutput</a>;                      
+<a name="l00054"></a><a class="code" href="structpid_data__t.html#a3b2830dd05ce20124e966f9a72c78346">00054</a>         <span class="keywordtype">double</span> samplePeriodMs;          
 <a name="l00055"></a>00055 
-<a name="l00056"></a>00056 <span class="preprocessor">#endif</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span>
-<a name="l00058"></a>00058 <span class="comment">// EOF</span>
+<a name="l00056"></a><a class="code" href="structpid_data__t.html#ae6aae2bce86f01d5d6c4731b37dd3d70">00056</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#ae6aae2bce86f01d5d6c4731b37dd3d70" title="The proportional term that is summed as part of the output (calculated in Pid_Go())">pTerm</a>;                           
+<a name="l00057"></a><a class="code" href="structpid_data__t.html#af1d140d9ce035e5de7981e49f23ddc43">00057</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#af1d140d9ce035e5de7981e49f23ddc43" title="The integral term that is summed as part of the output (calculated in Pid_Go())">iTerm</a>;                           
+<a name="l00058"></a><a class="code" href="structpid_data__t.html#aced4d9a2d62a597db5bb3b72c9a93cbf">00058</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#aced4d9a2d62a597db5bb3b72c9a93cbf" title="The derivative term that is summed as part of the output (calculated in Pid_Go())">dTerm</a>;                           
+<a name="l00059"></a><a class="code" href="structpid_data__t.html#a5df6ddfa37685d9035861b0d9f323a05">00059</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a5df6ddfa37685d9035861b0d9f323a05" title="The minimum output value. Anything lower will be limited to this floor.">outMin</a>;                          
+<a name="l00060"></a><a class="code" href="structpid_data__t.html#a3bcf8ed648b49bfe14cf141b134ba23b">00060</a>         <span class="keywordtype">double</span> <a class="code" href="structpid_data__t.html#a3bcf8ed648b49bfe14cf141b134ba23b" title="The maximum output value. Anything higher will be limited to this ceiling.">outMax</a>;                          
+<a name="l00061"></a>00061         <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a> controllerDir;
+<a name="l00062"></a>00062 } <a class="code" href="structpid_data__t.html">pidData_t</a>;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064 <span class="comment">//===============================================================================================//</span>
+<a name="l00065"></a>00065 <span class="comment">//=================================== PUBLIC FUNCTION PROTOTYPES ================================//</span>
+<a name="l00066"></a>00066 <span class="comment">//===============================================================================================//</span>
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="comment">// See the Doxygen documentation or the function definitions in Pid.c for more information</span>
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#ac30d3479e081a7f168f1e0d6d0bf37e4" title="Init function.">Pid_Init</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, <span class="keywordtype">double</span> kp, <span class="keywordtype">double</span> ki, <span class="keywordtype">double</span> kd, <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a> controllerDir, uint32_t sampleTimeMs);
+<a name="l00071"></a>00071 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#a26d14b732e57396bb48e9ccffcc198df" title="Computes new PID values.">Pid_Run</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, <span class="keywordtype">double</span> input);
+<a name="l00072"></a>00072 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a7572684c11df570671608ba5fb192ff0" title="Returns the last calculated error.">Pid_GetError</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);      
+<a name="l00073"></a>00073 <span class="keywordtype">void</span>    Pid_SetSetPoint(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, <span class="keywordtype">double</span> setPoint);
+<a name="l00074"></a>00074 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#ab07fe89d3c3b7db23af87445a05ba568">Pid_SetControllerDirection</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a> controllerDir);
+<a name="l00075"></a>00075 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#a01d8d060c2a5040e1dda0090fd1ce0d4" title="Changes the sample time.">Pid_SetSamplePeriod</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, uint32_t newSamplePeriodMs);
+<a name="l00076"></a>00076 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a844e5a347d803faf7e2a281ad0750648" title="Returns the porportional constant.">Pid_GetKp</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);                                          
+<a name="l00077"></a>00077 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#ae687985256ad5b6626b80a10995c04ad" title="Returns the integral constant.">Pid_GetKi</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);                                           
+<a name="l00078"></a>00078 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a788faaf6a50c30eb818ad9a6d08f4457" title="Returns the derivative constant.">Pid_GetKd</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);                                            
+<a name="l00079"></a>00079 <a class="code" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a> <a class="code" href="_pid_8c.html#afb130b5ed8b4e30759c83c701728dc53" title="Returns the direction.">Pid_GetDirection</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);                                 
+<a name="l00080"></a>00080 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#a8419ebe28cac2ad59959631c523fd37d" title="Returns the last calculated derivative term.">Pid_GetDTerm</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);
+<a name="l00081"></a>00081 <span class="keywordtype">double</span>  <a class="code" href="_pid_8c.html#aaff4db4477c7aa11ae8c71e5ec076cef" title="Returns the last calculated input change.">Pid_GetInputChange</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData);
+<a name="l00082"></a>00082 <span class="keywordtype">void</span>    <a class="code" href="_pid_8c.html#a64ae3beba2fd1e0df72a2a95b026d4ab" title="This function allows the controller&#39;s dynamic performance to be adjusted.">Pid_SetTunings</a>(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, <span class="keywordtype">double</span> kp, <span class="keywordtype">double</span> ki, <span class="keywordtype">double</span> kd);
+<a name="l00083"></a>00083 <span class="keywordtype">void</span>    Pid_SetOutputLimits(<a class="code" href="structpid_data__t.html">pidData_t</a> *pidData, <span class="keywordtype">double</span> min, <span class="keywordtype">double</span> max);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="preprocessor">#endif</span>
+<a name="l00086"></a>00086 <span class="preprocessor"></span>
+<a name="l00087"></a>00087 <span class="comment">// EOF</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -124,7 +152,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -133,7 +161,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 2 2012 18:20:22 for PID by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 15 2012 17:46:12 for PID by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

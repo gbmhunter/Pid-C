@@ -19,7 +19,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
-   <div id="projectname">PID&#160;<span id="projectnumber">v1.0.0</span></div>
+   <div id="projectname">PID&#160;<span id="projectnumber">v1.1.0</span></div>
    <div id="projectbrief">PID controller.</div>
   </td>
  </tr>
@@ -29,6 +29,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -57,111 +58,66 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">src/Pid.c File Reference</div>  </div>
 </div>
 <div class="contents">
 
-<p>Controls any lights (e.g. LEDS).  
+<p>Generic PID controller that supports multiple control loops.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;device.h&gt;</code><br/>
 <code>#include &lt;math.h&gt;</code><br/>
 <code>#include &lt;stdio.h&gt;</code><br/>
 <code>#include &lt;stdlib.h&gt;</code><br/>
-<code>#include &quot;FreeRTOS.h&quot;</code><br/>
-<code>#include &quot;task.h&quot;</code><br/>
-<code>#include &quot;queue.h&quot;</code><br/>
-<code>#include &quot;semphr.h&quot;</code><br/>
 <code>#include &quot;PublicDefinesAndTypeDefs.h&quot;</code><br/>
 <code>#include &quot;Config.h&quot;</code><br/>
 <code>#include &quot;./Pid/Pid.h&quot;</code><br/>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a344531a8de4e1ab13e754dbd392fa6e4">Pid_Init</a> (double kp, double ki, double kd, <a class="el" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a> controllerDirection, uint32_t sampleTimeMs)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Init function.  <a href="#a344531a8de4e1ab13e754dbd392fa6e4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#ac75d7b3be89861bec6280101226f04e8">Pid_Compute</a> (double setPoint, double input)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes new PID values.  <a href="#ac75d7b3be89861bec6280101226f04e8"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#ae0b88189a6a4b9ccc13b53cfb506b9f9">Pid_SetTunings</a> (double kp, double ki, double kd)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This function allows the controller's dynamic performance to be adjusted.  <a href="#ae0b88189a6a4b9ccc13b53cfb506b9f9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af86b8fe2ac43bedf27e12581b651cc42"></a><!-- doxytag: member="Pid.c::Pid_SetSampleTime" ref="af86b8fe2ac43bedf27e12581b651cc42" args="(uint32_t newSampleTimeMs)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#af86b8fe2ac43bedf27e12581b651cc42">Pid_SetSampleTime</a> (uint32_t newSampleTimeMs)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#ac30d3479e081a7f168f1e0d6d0bf37e4">Pid_Init</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, double kp, double ki, double kd, <a class="el" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a> controllerDir, uint32_t samplePeriodMs)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Init function.  <a href="#ac30d3479e081a7f168f1e0d6d0bf37e4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a26d14b732e57396bb48e9ccffcc198df">Pid_Run</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, double input)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes new PID values.  <a href="#a26d14b732e57396bb48e9ccffcc198df"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99adf66f1551ba4dcd50f2a5f470461e"></a><!-- doxytag: member="Pid.c::Pid_SetSetPoint" ref="a99adf66f1551ba4dcd50f2a5f470461e" args="(pidData_t *pidData, double setPoint)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Pid_SetSetPoint</b> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, double setPoint)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a64ae3beba2fd1e0df72a2a95b026d4ab">Pid_SetTunings</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, double kp, double ki, double kd)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This function allows the controller's dynamic performance to be adjusted.  <a href="#a64ae3beba2fd1e0df72a2a95b026d4ab"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01d8d060c2a5040e1dda0090fd1ce0d4"></a><!-- doxytag: member="Pid.c::Pid_SetSamplePeriod" ref="a01d8d060c2a5040e1dda0090fd1ce0d4" args="(pidData_t *pidData, uint32_t newSamplePeriodMs)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a01d8d060c2a5040e1dda0090fd1ce0d4">Pid_SetSamplePeriod</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, uint32_t newSamplePeriodMs)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the sample time. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd28864403a630cd0f23afed28509e68"></a><!-- doxytag: member="Pid.c::Pid_SetOutputLimits" ref="afd28864403a630cd0f23afed28509e68" args="(double min, double max)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Pid_SetOutputLimits</b> (double min, double max)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a1b1573f04fcaaf6932d98ad53817909e">Pid_SetControllerDirection</a> (<a class="el" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a> controllerDirection)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a104e9687b7698bd6cc49cffc6632ad14"></a><!-- doxytag: member="Pid.c::Pid_GetKp" ref="a104e9687b7698bd6cc49cffc6632ad14" args="()" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a104e9687b7698bd6cc49cffc6632ad14">Pid_GetKp</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa5cccccb889c951c3036de9965112b99"></a><!-- doxytag: member="Pid.c::Pid_SetOutputLimits" ref="aa5cccccb889c951c3036de9965112b99" args="(pidData_t *pidData, double min, double max)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Pid_SetOutputLimits</b> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, double min, double max)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#ab07fe89d3c3b7db23af87445a05ba568">Pid_SetControllerDirection</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData, <a class="el" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a> controllerDir)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a844e5a347d803faf7e2a281ad0750648"></a><!-- doxytag: member="Pid.c::Pid_GetKp" ref="a844e5a347d803faf7e2a281ad0750648" args="(pidData_t *pidData)" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a844e5a347d803faf7e2a281ad0750648">Pid_GetKp</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the porportional constant. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabff5dba183e7b5e977fdb387ebd9f44"></a><!-- doxytag: member="Pid.c::Pid_GetKi" ref="aabff5dba183e7b5e977fdb387ebd9f44" args="()" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#aabff5dba183e7b5e977fdb387ebd9f44">Pid_GetKi</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae687985256ad5b6626b80a10995c04ad"></a><!-- doxytag: member="Pid.c::Pid_GetKi" ref="ae687985256ad5b6626b80a10995c04ad" args="(pidData_t *pidData)" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#ae687985256ad5b6626b80a10995c04ad">Pid_GetKi</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the integral constant. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a917b9dd1a4ffe2253543c7ce45932742"></a><!-- doxytag: member="Pid.c::Pid_GetKd" ref="a917b9dd1a4ffe2253543c7ce45932742" args="()" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a917b9dd1a4ffe2253543c7ce45932742">Pid_GetKd</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a788faaf6a50c30eb818ad9a6d08f4457"></a><!-- doxytag: member="Pid.c::Pid_GetKd" ref="a788faaf6a50c30eb818ad9a6d08f4457" args="(pidData_t *pidData)" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a788faaf6a50c30eb818ad9a6d08f4457">Pid_GetKd</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the derivative constant. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b54780093be5681096896d5547cbd56"></a><!-- doxytag: member="Pid.c::Pid_GetDirection" ref="a9b54780093be5681096896d5547cbd56" args="()" -->
-<a class="el" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a9b54780093be5681096896d5547cbd56">Pid_GetDirection</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb130b5ed8b4e30759c83c701728dc53"></a><!-- doxytag: member="Pid.c::Pid_GetDirection" ref="afb130b5ed8b4e30759c83c701728dc53" args="(pidData_t *pidData)" -->
+<a class="el" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#afb130b5ed8b4e30759c83c701728dc53">Pid_GetDirection</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the direction. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a017764c792e986a6a31106ff867168fb"></a><!-- doxytag: member="Pid.c::Pid_GetError" ref="a017764c792e986a6a31106ff867168fb" args="()" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a017764c792e986a6a31106ff867168fb">Pid_GetError</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7572684c11df570671608ba5fb192ff0"></a><!-- doxytag: member="Pid.c::Pid_GetError" ref="a7572684c11df570671608ba5fb192ff0" args="(pidData_t *pidData)" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a7572684c11df570671608ba5fb192ff0">Pid_GetError</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last calculated error. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af5b9ecb087e8b9317b593b5f4ea63b11"></a><!-- doxytag: member="Pid.c::Pid_GetDTerm" ref="af5b9ecb087e8b9317b593b5f4ea63b11" args="()" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#af5b9ecb087e8b9317b593b5f4ea63b11">Pid_GetDTerm</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8419ebe28cac2ad59959631c523fd37d"></a><!-- doxytag: member="Pid.c::Pid_GetDTerm" ref="a8419ebe28cac2ad59959631c523fd37d" args="(pidData_t *pidData)" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#a8419ebe28cac2ad59959631c523fd37d">Pid_GetDTerm</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last calculated derivative term. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeda6d318f4c704780d7092991fdfdc2a"></a><!-- doxytag: member="Pid.c::Pid_GetInputChange" ref="aeda6d318f4c704780d7092991fdfdc2a" args="()" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#aeda6d318f4c704780d7092991fdfdc2a">Pid_GetInputChange</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaff4db4477c7aa11ae8c71e5ec076cef"></a><!-- doxytag: member="Pid.c::Pid_GetInputChange" ref="aaff4db4477c7aa11ae8c71e5ec076cef" args="(pidData_t *pidData)" -->
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_pid_8c.html#aaff4db4477c7aa11ae8c71e5ec076cef">Pid_GetInputChange</a> (<a class="el" href="structpid_data__t.html">pidData_t</a> *pidData)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last calculated input change. <br/></td></tr>
-<tr><td colspan="2"><h2><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86d8cfac20ed36d18d7221a6fdba4c81"></a><!-- doxytag: member="Pid.c::_dispKp" ref="a86d8cfac20ed36d18d7221a6fdba4c81" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_dispKp</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7faae168685dd3bab5364c5cee101b0"></a><!-- doxytag: member="Pid.c::_dispKi" ref="ad7faae168685dd3bab5364c5cee101b0" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_dispKi</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af2e810fa7a00519bd6a092f7eba0311f"></a><!-- doxytag: member="Pid.c::_dispKd" ref="af2e810fa7a00519bd6a092f7eba0311f" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_dispKd</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d42339ae01b7144fcd5d7f1b741e850"></a><!-- doxytag: member="Pid.c::_kp" ref="a2d42339ae01b7144fcd5d7f1b741e850" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_kp</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3041473ff3ca1aca5c4a648bd2f7fc5"></a><!-- doxytag: member="Pid.c::_ki" ref="ae3041473ff3ca1aca5c4a648bd2f7fc5" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_ki</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af742ae29df9e0adace2faccd7880b921"></a><!-- doxytag: member="Pid.c::_kd" ref="af742ae29df9e0adace2faccd7880b921" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_kd</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03077a711ae56e798ab5890613103ec4"></a><!-- doxytag: member="Pid.c::_controllerDirection" ref="a03077a711ae56e798ab5890613103ec4" args="" -->
-<a class="el" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_controllerDirection</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec2237392c78d482fb0d599ccc636bf7"></a><!-- doxytag: member="Pid.c::_input" ref="aec2237392c78d482fb0d599ccc636bf7" args="" -->
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>_input</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab74256f17cacb7b8c8448728eb341a2f"></a><!-- doxytag: member="Pid.c::_output" ref="ab74256f17cacb7b8c8448728eb341a2f" args="" -->
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>_output</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae92864c17afab9b6391b522ce4203896"></a><!-- doxytag: member="Pid.c::_setPoint" ref="ae92864c17afab9b6391b522ce4203896" args="" -->
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>_setPoint</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a117a2439506f8eb876a6b720b3f187e4"></a><!-- doxytag: member="Pid.c::_error" ref="a117a2439506f8eb876a6b720b3f187e4" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_error</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f202a73e61b77820dfd591ad3534986"></a><!-- doxytag: member="Pid.c::_dTerm" ref="a4f202a73e61b77820dfd591ad3534986" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_dTerm</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c2c56688d26315b6bc556b66d3bef1d"></a><!-- doxytag: member="Pid.c::_lastTime" ref="a2c2c56688d26315b6bc556b66d3bef1d" args="" -->
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>_lastTime</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a541daf287849ec84d18e83b24ab01545"></a><!-- doxytag: member="Pid.c::_iTerm" ref="a541daf287849ec84d18e83b24ab01545" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_iTerm</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac46db5f146f7ac1cf135918152711568"></a><!-- doxytag: member="Pid.c::_lastInput" ref="ac46db5f146f7ac1cf135918152711568" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_lastInput</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0898d881614564ffa47fe78b7b53b21d"></a><!-- doxytag: member="Pid.c::_inputChange" ref="a0898d881614564ffa47fe78b7b53b21d" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_inputChange</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc7d8b4e62a211bd7093d6bd002a1d1b"></a><!-- doxytag: member="Pid.c::_sampleTimeMs" ref="abc7d8b4e62a211bd7093d6bd002a1d1b" args="" -->
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>_sampleTimeMs</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6bf9612733d508b3c6f7a4b4bac3ba27"></a><!-- doxytag: member="Pid.c::_outMin" ref="a6bf9612733d508b3c6f7a4b4bac3ba27" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_outMin</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b994b026e7597ad540420df22d6c7f6"></a><!-- doxytag: member="Pid.c::_outMax" ref="a2b994b026e7597ad540420df22d6c7f6" args="" -->
-double&#160;</td><td class="memItemRight" valign="bottom"><b>_outMax</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3105d3168605bcbde22468f915b4b568"></a><!-- doxytag: member="Pid.c::_inAuto" ref="a3105d3168605bcbde22468f915b4b568" args="" -->
-bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Controls any lights (e.g. LEDS). </p>
+<div class="textblock"><p>Generic PID controller that supports multiple control loops. </p>
 <dl class="author"><dt><b>Author:</b></dt><dd>Geoffrey Hunter &lt;<a href="mailto:gbmhunter@gmail.com">gbmhunter@gmail.com</a>&gt; (www.cladlabs.com)  n/a </dd></dl>
 <dl class="date"><dt><b>Date:</b></dt><dd>09/11/2012</dd></dl>
-<p><b>Last Modified: </b> 02/10/2012 <br/>
- <b>Version: </b> v1.0.0 <br/>
+<p><b>Last Modified: </b> 15/10/2012 <br/>
+ <b>Version: </b> v1.1.0 <br/>
  <b>Company: </b> CladLabs <br/>
  <b>Project: </b> Free Code Modules <br/>
  <b>Language: </b> C <br/>
@@ -171,45 +127,23 @@ bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></t
  <b>Operating System: </b> FreeRTOS v7.2.0 <br/>
  <b>Documentation Format: </b> Doxygen <br/>
  <b>License: </b> GPLv3 <br/>
- </p>
+</p>
+<p>Since all parameters are passed in by sturcture pointer into PID controller functions, this file can work with as many seperate PID control loops as you wish.</p>
+<p>CHANGELOG: v1.1.0 -&gt; Changed the PID variables to they are stored in an external structure (passed in by pointer), so that this file can be used to control as many PID loops as you wish (kind of object-orientated). </p>
 </div><hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ac75d7b3be89861bec6280101226f04e8"></a><!-- doxytag: member="Pid.c::Pid_Compute" ref="ac75d7b3be89861bec6280101226f04e8" args="(double setPoint, double input)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double Pid_Compute </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>setPoint</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>input</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Computes new PID values. </p>
-<p>Call once per sampleTimeMs as determine when <a class="el" href="_pid_8c.html#a344531a8de4e1ab13e754dbd392fa6e4" title="Init function.">Pid_Init()</a> is called </p>
-
-</div>
-</div>
-<a class="anchor" id="a344531a8de4e1ab13e754dbd392fa6e4"></a><!-- doxytag: member="Pid.c::Pid_Init" ref="a344531a8de4e1ab13e754dbd392fa6e4" args="(double kp, double ki, double kd, controllerDirection_t controllerDirection, uint32_t sampleTimeMs)" -->
+<a class="anchor" id="ac30d3479e081a7f168f1e0d6d0bf37e4"></a><!-- doxytag: member="Pid.c::Pid_Init" ref="ac30d3479e081a7f168f1e0d6d0bf37e4" args="(pidData_t *pidData, double kp, double ki, double kd, ctrlDir_t controllerDir, uint32_t samplePeriodMs)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Pid_Init </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="structpid_data__t.html">pidData_t</a> *&#160;</td>
+          <td class="paramname"><em>pidData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>kp</em>, </td>
         </tr>
@@ -228,14 +162,14 @@ bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></t
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a>&#160;</td>
-          <td class="paramname"><em>controllerDirection</em>, </td>
+          <td class="paramtype"><a class="el" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a>&#160;</td>
+          <td class="paramname"><em>controllerDir</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>sampleTimeMs</em>&#160;</td>
+          <td class="paramname"><em>samplePeriodMs</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -251,16 +185,56 @@ bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></t
 
 </div>
 </div>
-<a class="anchor" id="a1b1573f04fcaaf6932d98ad53817909e"></a><!-- doxytag: member="Pid.c::Pid_SetControllerDirection" ref="a1b1573f04fcaaf6932d98ad53817909e" args="(controllerDirection_t controllerDirection)" -->
+<a class="anchor" id="a26d14b732e57396bb48e9ccffcc198df"></a><!-- doxytag: member="Pid.c::Pid_Run" ref="a26d14b732e57396bb48e9ccffcc198df" args="(pidData_t *pidData, double input)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Pid_Run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpid_data__t.html">pidData_t</a> *&#160;</td>
+          <td class="paramname"><em>pidData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Computes new PID values. </p>
+<p>Call once per sampleTimeMs. Output is stored in the pidData structure. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab07fe89d3c3b7db23af87445a05ba568"></a><!-- doxytag: member="Pid.c::Pid_SetControllerDirection" ref="ab07fe89d3c3b7db23af87445a05ba568" args="(pidData_t *pidData, ctrlDir_t controllerDir)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Pid_SetControllerDirection </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="_pid_8h.html#a0c14cb1f3c6f3b5edd830388c08bdc2d">controllerDirection_t</a>&#160;</td>
-          <td class="paramname"><em>controllerDirection</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structpid_data__t.html">pidData_t</a> *&#160;</td>
+          <td class="paramname"><em>pidData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="_pid_8h.html#a098d7559e63c32327cd608eb098555bd">ctrlDir_t</a>&#160;</td>
+          <td class="paramname"><em>controllerDir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -269,13 +243,19 @@ bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></t
 
 </div>
 </div>
-<a class="anchor" id="ae0b88189a6a4b9ccc13b53cfb506b9f9"></a><!-- doxytag: member="Pid.c::Pid_SetTunings" ref="ae0b88189a6a4b9ccc13b53cfb506b9f9" args="(double kp, double ki, double kd)" -->
+<a class="anchor" id="a64ae3beba2fd1e0df72a2a95b026d4ab"></a><!-- doxytag: member="Pid.c::Pid_SetTunings" ref="a64ae3beba2fd1e0df72a2a95b026d4ab" args="(pidData_t *pidData, double kp, double ki, double kd)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void Pid_SetTunings </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="structpid_data__t.html">pidData_t</a> *&#160;</td>
+          <td class="paramname"><em>pidData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>kp</em>, </td>
         </tr>
@@ -311,7 +291,7 @@ bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></t
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -320,7 +300,7 @@ bool_t&#160;</td><td class="memItemRight" valign="bottom"><b>_inAuto</b></td></t
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 2 2012 18:20:22 for PID by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 15 2012 17:46:12 for PID by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
