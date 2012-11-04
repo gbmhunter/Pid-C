@@ -5,7 +5,7 @@
 //! @date 		09/11/2012
 //! @brief 		Generic PID controller that supports multiple control loops.
 //! @details
-//!		<b>Last Modified:			</b> 15/10/2012					\n
+//!		<b>Last Modified:			</b> 04/11/2012					\n
 //!		<b>Version:					</b> v1.1.0						\n
 //!		<b>Company:					</b> CladLabs					\n
 //!		<b>Project:					</b> Free Code Modules			\n
@@ -42,7 +42,7 @@
 // User
 #include "PublicDefinesAndTypeDefs.h"
 #include "Config.h"
-#include "./Pid/Pid.h"
+#include "Pid.h"
 
 //===============================================================================================//
 //================================== PRECOMPILER CHECKS =========================================//
