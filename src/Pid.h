@@ -2,10 +2,10 @@
 //! @file 		Pid.h
 //! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 //! @edited 	n/a
-//! @date 		09/11/2012
+//! @date 		09/10/2012
 //! @brief 		Header file for Pid.c
 //! @details
-//!		<b>Last Modified:			</b> 15/10/2012					\n
+//!		<b>Last Modified:			</b> 04/11/2012					\n
 //!		<b>Version:					</b> v1.1.0						\n
 //!		<b>Company:					</b> CladLabs					\n
 //!		<b>Project:					</b> Free Code Modules			\n
@@ -20,9 +20,17 @@
 //!		See the Doxygen documentation or Pid.c for a detailed description on this module.
 //!		
 
+//===============================================================================================//
+//=========================================== GUARDS ============================================//
+//===============================================================================================//
+
 // Start of header guard
-#ifndef _PID_H
-#define _PID_H
+#ifndef PID_H
+#define PID_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 //===============================================================================================//
 //=================================== PUBLIC TYPEDEFS ===========================================//
@@ -82,6 +90,10 @@ double 	Pid_GetInputChange(pidData_t *pidData);
 void 	Pid_SetTunings(pidData_t *pidData, double kp, double ki, double kd);
 void	Pid_SetOutputLimits(pidData_t *pidData, double min, double max);
 
+#ifdef __cplusplus
+} // extern "C" {
 #endif
+
+#endif // #ifndef PID_H
 
 // EOF

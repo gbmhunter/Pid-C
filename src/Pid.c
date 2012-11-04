@@ -2,7 +2,7 @@
 //! @file 		Pid.c
 //! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 //! @edited 	n/a
-//! @date 		09/11/2012
+//! @date 		09/10/2012
 //! @brief 		Generic PID controller that supports multiple control loops.
 //! @details
 //!		<b>Last Modified:			</b> 04/11/2012					\n
@@ -26,6 +26,13 @@
 //!		as you wish (kind of object-orientated).
 //!					
 
+//===============================================================================================//
+//=========================================== GUARDS ============================================//
+//===============================================================================================//
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 //===============================================================================================//
 //========================================= INCLUDES ============================================//
@@ -246,5 +253,9 @@ double Pid_GetInputChange(pidData_t *pidData)
 {
 	return pidData->inputChange;
 }
+
+#ifdef __cplusplus
+} // extern "C" {
+#endif
 
 // EOF
