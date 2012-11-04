@@ -6,7 +6,7 @@
 //! @brief 		Header file for Pid.c
 //! @details
 //!		<b>Last Modified:			</b> 04/11/2012					\n
-//!		<b>Version:					</b> v1.1.0						\n
+//!		<b>Version:					</b> v1.1.1						\n
 //!		<b>Company:					</b> CladLabs					\n
 //!		<b>Project:					</b> Free Code Modules			\n
 //!		<b>Language:				</b> C							\n
@@ -17,8 +17,19 @@
 //!		<b>Documentation Format:	</b> Doxygen					\n
 //!		<b>License:					</b> GPLv3						\n
 //!	
-//!		See the Doxygen documentation or Pid.c for a detailed description on this module.
-//!		
+//! 	Since all parameters are passed in by sturcture pointer into PID controller functions,
+//!		this file can work with as many seperate PID control loops as you wish.
+//!
+//!		PID currently has an accumulating output (e.g. velocity PID control). The ability
+//!		to change to non-accumulating is planned.
+//!
+//! 	CHANGELOG:
+//! 	v1.1.0 -> Changed the PID variables to they are stored in an external structure
+//!		(passed in by pointer), so that this file can be used to control as many PID loops
+//!		as you wish (kind of object-orientated).
+//!
+//!		v1.1.1 -> Wrapped code in C++ guards. Moved function documentation to Pid.h.
+//!	
 
 //===============================================================================================//
 //=========================================== GUARDS ============================================//
@@ -66,27 +77,66 @@ typedef struct
 	double dTerm;				//!< The derivative term that is summed as part of the output (calculated in Pid_Go())
 	double outMin;				//!< The minimum output value. Anything lower will be limited to this floor.
 	double outMax;				//!< The maximum output value. Anything higher will be limited to this ceiling.
-	ctrlDir_t controllerDir;
+	ctrlDir_t controllerDir;	//!< The control direction for the PID instance.
 } pidData_t;
 
 //===============================================================================================//
 //=================================== PUBLIC FUNCTION PROTOTYPES ================================//
 //===============================================================================================//
 
-// See the Doxygen documentation or the function definitions in Pid.c for more information
+// See the Doxygen documentation for more information.
 
+//! @brief 		Init function
+//! @details   	The parameters specified here are those for for which we can't set up 
+//!    			reliable defaults, so we need to have the user set them.
+//! @public
 void 	Pid_Init(pidData_t *pidData, double kp, double ki, double kd, ctrlDir_t controllerDir, uint32_t sampleTimeMs);
+
+//! @brief 		Computes new PID values
+//! @details 	Call once per sampleTimeMs. Output is stored in the pidData structure.
+//! @public
 void 	Pid_Run(pidData_t *pidData, double input);
+
+//! @brief		Returns the last calculated error
+//! @public
 double 	Pid_GetError(pidData_t *pidData);      
 void	Pid_SetSetPoint(pidData_t *pidData, double setPoint);
+
+//! @details	The PID will either be connected to a direct acting process (+error leads to +output, aka inputs are positive) 
+//!				or a reverse acting process (+error leads to -output, aka inputs are negative)
+//! @public
 void 	Pid_SetControllerDirection(pidData_t *pidData, ctrlDir_t controllerDir);
+
+//! @brief		Changes the sample time
 void 	Pid_SetSamplePeriod(pidData_t *pidData, uint32_t newSamplePeriodMs);
-double 	Pid_GetKp(pidData_t *pidData);						
-double 	Pid_GetKi(pidData_t *pidData);						 
-double 	Pid_GetKd(pidData_t *pidData);						  
-ctrlDir_t Pid_GetDirection(pidData_t *pidData);					
+
+//! @brief		Returns the porportional constant
+//! @public
+double 	Pid_GetKp(pidData_t *pidData);	
+
+//! @brief		Returns the integral constant
+//! @public					
+double 	Pid_GetKi(pidData_t *pidData);	
+
+//! @brief		Returns the derivative constant
+//! @public					 
+double 	Pid_GetKd(pidData_t *pidData);		
+
+//! @brief		Returns the direction
+//! @public				  
+ctrlDir_t Pid_GetDirection(pidData_t *pidData);	
+
+//! @brief		Returns the last calculated derivative term
+//! @public				
 double 	Pid_GetDTerm(pidData_t *pidData);
+
+//! @brief		Returns the last calculated input change
+//! @public
 double 	Pid_GetInputChange(pidData_t *pidData);
+
+//! @brief		This function allows the controller's dynamic performance to be adjusted. 
+//! @details	It's called automatically from the init function, but tunings can also
+//! 			be adjusted on the fly during normal operation
 void 	Pid_SetTunings(pidData_t *pidData, double kp, double ki, double kd);
 void	Pid_SetOutputLimits(pidData_t *pidData, double min, double max);
 
