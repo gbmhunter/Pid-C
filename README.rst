@@ -4,8 +4,8 @@ Reusable C PID Library
 
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/11/09
-- Last Modified: 2013/06/04
-- Version: v1.1.1.1
+- Last Modified: 2013/09/16
+- Version: v1.1.2.0
 - Company: CladLabs
 - Project: n/a
 - Language: C
@@ -31,15 +31,15 @@ External Dependencies
 
 None
 
-ISSUES
+Issues
 ======
 
-- See GitHub issues section
+See GitHub issues section
 
-LIMITATIONS
+Limitations
 ===========
 
-- None documented
+None documented
 
 Usage
 =====
@@ -55,7 +55,8 @@ Changelog
 
 ======== ========== ===================================================================================================
 Version  Date       Comment
-======== ========== ===================================================================================================
+======== ========= ===================================================================================================
+v1.1.2.0 2013/09/16 Deleted old Mercurial repo files (.hgignore and .hgtags). Fixed capaitilisation of some of the README section names.
 v1.1.1.1 2013/06/04 Modified README.txt to README.rst.
 v1.1.1.0 2012/11/04 Moved function documentation from Pid.c into Pid.h. Currently v1.1.1.0
 v1.1.0.0 2012/10/14 Made PID functions use external structures, added readme file. PID variables stored in struct.
