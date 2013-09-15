@@ -3,33 +3,9 @@
 //! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 //! @edited 	n/a
 //! @date 		09/10/2012
-//! @brief 		Header file for Pid.c
+//! @brief 		Generic PID controller designed for microcontrollers that supports multiple control loops.
 //! @details
-//!		<b>Last Modified:			</b> 04/11/2012					\n
-//!		<b>Version:					</b> v1.1.1						\n
-//!		<b>Company:					</b> CladLabs					\n
-//!		<b>Project:					</b> Free Code Modules			\n
-//!		<b>Language:				</b> C							\n
-//!		<b>Compiler:				</b> GCC						\n
-//! 	<b>uC Model:				</b> PSoC5						\n
-//!		<b>Computer Architecture:	</b> ARM						\n
-//! 	<b>Operating System:		</b> FreeRTOS v7.2.0			\n
-//!		<b>Documentation Format:	</b> Doxygen					\n
-//!		<b>License:					</b> GPLv3						\n
-//!	
-//! 	Since all parameters are passed in by sturcture pointer into PID controller functions,
-//!		this file can work with as many seperate PID control loops as you wish.
-//!
-//!		PID currently has an accumulating output (e.g. velocity PID control). The ability
-//!		to change to non-accumulating is planned.
-//!
-//! 	CHANGELOG:
-//! 	v1.1.0 -> Changed the PID variables to they are stored in an external structure
-//!		(passed in by pointer), so that this file can be used to control as many PID loops
-//!		as you wish (kind of object-orientated).
-//!
-//!		v1.1.1 -> Wrapped code in C++ guards. Moved function documentation to Pid.h.
-//!	
+//!				See the README in root dir for more info.
 
 //===============================================================================================//
 //=========================================== GUARDS ============================================//
@@ -84,13 +60,17 @@ typedef struct
 //=================================== PUBLIC FUNCTION PROTOTYPES ================================//
 //===============================================================================================//
 
-// See the Doxygen documentation for more information.
-
 //! @brief 		Init function
 //! @details   	The parameters specified here are those for for which we can't set up 
 //!    			reliable defaults, so we need to have the user set them.
 //! @public
-void 	Pid_Init(pidData_t *pidData, double kp, double ki, double kd, ctrlDir_t controllerDir, uint32_t sampleTimeMs);
+void Pid_Init(
+	pidData_t *pidData,
+	double kp,
+	double ki,
+	double kd,
+	ctrlDir_t controllerDir,
+	uint32_t samplePeriodMs);
 
 //! @brief 		Computes new PID values
 //! @details 	Call once per sampleTimeMs. Output is stored in the pidData structure.

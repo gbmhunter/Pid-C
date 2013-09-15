@@ -3,22 +3,9 @@
 //! @author 	Geoffrey Hunter <gbmhunter@gmail.com> (www.cladlabs.com)
 //! @edited 	n/a
 //! @date 		09/10/2012
-//! @brief 		Generic PID controller that supports multiple control loops.
+//! @brief 		Generic PID controller designed for microcontrollers that supports multiple control loops.
 //! @details
-//!		<b>Last Modified:			</b> 04/11/2012					\n
-//!		<b>Version:					</b> v1.1.1						\n
-//!		<b>Company:					</b> CladLabs					\n
-//!		<b>Project:					</b> Free Code Modules			\n
-//!		<b>Language:				</b> C							\n
-//!		<b>Compiler:				</b> GCC						\n
-//! 	<b>uC Model:				</b> PSoC5						\n
-//!		<b>Computer Architecture:	</b> ARM						\n
-//! 	<b>Operating System:		</b> FreeRTOS v7.2.0			\n
-//!		<b>Documentation Format:	</b> Doxygen					\n
-//!		<b>License:					</b> GPLv3						\n
-//!
-//!		See the Doxygen documentation or Pid.h for a detailed description on this module.
-//!					
+//!				See the README in the root dir for more info.
 
 //===============================================================================================//
 //=========================================== GUARDS ============================================//
@@ -32,25 +19,20 @@ extern "C" {
 //========================================= INCLUDES ============================================//
 //===============================================================================================//
 
-// PSoC
-#include <device.h>
-
 // GCC
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 // User
-#include "PublicDefinesAndTypeDefs.h"
-#include "Config.h"
-#include "Pid.h"
+#include "./include/Pid.h"
 
 //===============================================================================================//
 //================================== PRECOMPILER CHECKS =========================================//
 //===============================================================================================//
 
 #ifndef configPRINT_DEBUG_PID
-	#error Please define the switch configPRINT_DEBUG_PID
+	#warning configPRINT_DEBUG_PID is not defined.
 #endif
 
 //===============================================================================================//
@@ -77,7 +59,13 @@ extern "C" {
 
 // See Doxygen documentation or function declarations in Pid.h for descriptions
 
-void Pid_Init(pidData_t *pidData, double kp, double ki, double kd, ctrlDir_t controllerDir, uint32_t samplePeriodMs)
+void Pid_Init(
+	pidData_t *pidData,
+	double kp,
+	double ki,
+	double kd,
+	ctrlDir_t controllerDir,
+	uint32_t samplePeriodMs)
 {
 
 	Pid_SetOutputLimits(pidData, 0.0, 2000.0);		

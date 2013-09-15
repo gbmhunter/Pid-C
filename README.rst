@@ -5,7 +5,7 @@ Reusable C PID Library
 - Author: gbmhunter <gbmhunter@gmail.com> (http://www.cladlab.com)
 - Created: 2012/11/09
 - Last Modified: 2013/09/16
-- Version: v1.1.3.0
+- Version: v1.2.0.0
 - Company: CladLabs
 - Project: n/a
 - Language: C
@@ -56,6 +56,7 @@ Changelog
 ======== ========== ===================================================================================================
 Version  Date       Comment
 ======== ========== ===================================================================================================
+v1.2.0.0 2013/09/16 Removed unnecessary header file includes in Pid.c. Moved Pid.h to ./src/include/. Removed details section from title block comments in Pid.c and Pid.h. Changed the precompiler debug macro detection from a error to a warning.
 v1.1.3.0 2013/09/16 Removed Doxygen files (the ./doc folder).
 v1.1.2.1 2013/09/16 Fixed error in README Changelog table formatting.
 v1.1.2.0 2013/09/16 Deleted old Mercurial repo files (.hgignore and .hgtags). Fixed capaitilisation of some of the README section names.
